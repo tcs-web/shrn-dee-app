@@ -5,7 +5,7 @@
 <title>SHRN DEE PTY LTD | Beauty, Cosmetics & Recruitment</title>
 <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU0hSTiBERSBQVFkgTFREIiwic2hvcnRfbmFtZSI6IlNIUk4gREUiLCJzdGFydF91cmwiOiIiLCAiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzg5MDg4OSIsInRoZW1lX2NvbG9yIjoiIzg5MDg4OSIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2kuZWJiLmNvL1FqdFNuMURSL0lNRy0yMDI2MDcyOFdBMzUyLmpwZyIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9qcGVnIn1dfQ==">
 <meta name="theme-color" content="#890889">
-<link rel="apple-touch-icon" href="https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg">
+<link rel="apple-touch-icon" href="https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
@@ -102,7 +102,7 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
 
 <div id="clientView" style="display:none">
   <div class="client-header">
-    <img src="https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg" class="logo" style="margin:0 auto">
+    <img src="https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg" class="logo" style="margin:0 auto">
     <h2>SHRN DEE PTY LTD</h2>
     <p style="font-size:12px;margin:5px 0">Beauty Advisor | Independent Ambassador</p>
     <div class="search-box" style="max-width:500px;margin:10px auto"><input type="text" id="clientSearchInput" placeholder="Search products..." onkeyup="searchProducts()"></div>
@@ -135,7 +135,7 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
 
 <div id="loginScreen">
   <div class="login-box">
-    <img src="https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg" style="width:80px;margin:0 auto;display:block;border-radius:15px">
+    <img src="https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg" style="width:80px;margin:0 auto;display:block;border-radius:15px">
     <h2>SHRN DEE PTY LTD BIZPORTAL</h2>
     <div id="loginError" class="error"></div>
     <input type="email" id="loginEmail" placeholder="Email">
@@ -147,7 +147,7 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
 <div id="app" style="display:none">
   <div class="header">
     <div class="header-top">
-      <img src="https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg" class="logo">
+      <img src="https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg" class="logo">
       <div class="search-box"><input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()"></div>
       <div style="display:flex;gap:8px;align-items:center">
         <button class="btn" style="padding:5px 10px;font-size:12px;background:#fff;color:var(--blue)" onclick="toggleDark()">🌙</button>
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(lowStockList.innerHTML=='') lowStockList.innerHTML = '<p style="color:var(--green)">All stock levels good ✅</p>'
   }
 
-  function getImages(p){ if(!p.img) return ['https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg']; return p.img.split(',').map(s=>s.trim()).filter(s=>s); }
+  function getImages(p){ if(!p.img) return ['https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg']; return p.img.split(',').map(s=>s.trim()).filter(s=>s); }
   window.switchImage = (cardId, imgUrl, thumb) => { document.getElementById('main_'+cardId).src = imgUrl; document.querySelectorAll(`#card_${cardId}.card-imgs img`).forEach(i=>i.classList.remove('active')); thumb.classList.add('active'); }
 
   function getCartControls(id){
@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<div class="qty-controls"><button class="qty-btn" onclick="decreaseQty('${id}')">-</button><div class="qty-text">${item.qty}</div><button class="qty-btn" onclick="addToCart('${id}')">+</button></div>`;
   }
 
-    function renderProducts(){
+        function renderProducts(){
     productGrid.innerHTML = '';
     if(Object.keys(products).length === 0){ productGrid.innerHTML = `<p style="text-align:center;grid-column:1/-1">No products yet</p>`; return; }
     Object.entries(products).filter(([id,p])=>{
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let extraImgs = imgs.map((u,i)=>`<img src="${u}" class="${i==0?'active':''}" onclick="switchImage('${id}','${u}',this)" onerror="this.style.display='none'">`).join('');
       let brands = p.desc? p.desc.split(',').map(b=>`<span class="brand-tag">${b}</span>`).join('') : '';
       let cartBtn = p.stock >0? getCartControls(id) : `<button class="btn-oos" disabled>Out of Stock</button>`;
-      productGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">R${p.price} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div><div class="stock ${p.stock<10?'stock-low':''}">Stock: ${p.stock}</div>${cartBtn}</div>`;
+      productGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">R${p.price} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div><div class="stock ${p.stock<10?'stock-low':''}">Stock: ${p.stock}</div>${cartBtn}</div>`;
     })
   }
 
@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let extraImgs = imgs.map((u,i)=>`<img src="${u}" class="${i==0?'active':''}" onclick="switchImage('${id}','${u}',this)" onerror="this.style.display='none'">`).join('');
       let brands = p.desc? p.desc.split(',').map(b=>`<span class="brand-tag">${b}</span>`).join('') : '';
       let cartBtn = p.stock > 0? getCartControls(id) : `<button class="btn-oos" disabled>Out of Stock</button>`;
-      clientProductGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">R${p.price} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div><div class="stock ${p.stock<10?'stock-low':''}">Stock: ${p.stock}</div>${cartBtn}</div>`;
+      clientProductGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">R${p.price} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div><div class="stock ${p.stock<10?'stock-low':''}">Stock: ${p.stock}</div>${cartBtn}</div>`;
     })
   }
 
@@ -468,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let addTax = document.getElementById('invTaxToggle').checked; let isPaid = document.getElementById('invPaidToggle').checked;
     let subtotal = o.total; let tax = addTax? subtotal * 0.15 : 0; let grandTotal = subtotal + tax;
     const doc = new jsPDF();
-    doc.addImage('https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg', 'JPEG', 10, 10, 25, 25);
+    doc.addImage('https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg', 'JPEG', 10, 10, 25, 25);
     doc.setFontSize(16); doc.setFont(undefined, 'bold'); doc.text("SHRN DEE PTY LTD", 40, 18);
     doc.setFontSize(9); doc.text("ceo@shrndee.co.za | Beauty Ambassador", 40, 24);
     doc.line(10, 40, 200, 40);
@@ -521,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
     set(ref(db, 'shrn_dee_biz/requests/' + orderId), order);
 
     const doc = new jsPDF();
-    doc.addImage('https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg', 'JPEG', 10, 10, 25, 25);
+    doc.addImage('https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg', 'JPEG', 10, 10, 25, 25);
     doc.setFontSize(16); doc.setFont(undefined, 'bold'); doc.text("SHRN DEE PTY LTD", 40, 18);
     doc.setFontSize(9); doc.text("ceo@shrndee.co.za | Beauty Ambassador", 40, 24); doc.line(10, 40, 200, 40);
     doc.setFontSize(18); doc.setFont(undefined, 'bold'); doc.text("INVOICE", 150, 50);
@@ -544,19 +544,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.editProduct = (id) => { if(currentUser.role == 'reception') return alert('No permission'); let p = products[id]; editingId = id; pName.value = p.name; pCat.value = p.category; pImg.value = p.img; pPrice.value = p.price; pOldPrice.value = p.oldPrice; pStock.value = p.stock; pDesc.value = p.desc; formTitle.innerText = "✏️ Editing: " + p.name; saveBtn.innerText = "Update Product"; saveBtn.style.background = "var(--blue)"; cancelBtn.style.display = "block"; document.getElementById('tab-products').scrollIntoView(); }
   window.cancelEdit = () => { editingId = null; [pName,pImg,pPrice,pOldPrice,pStock,pDesc].forEach(i=>i.value=''); formTitle.innerText = "➕ Add Product"; saveBtn.innerText = "Save Product"; saveBtn.style.background = "var(--accent)"; cancelBtn.style.display = "none"; }
-  window.saveProduct = () => { if(currentUser.role == 'reception') return alert('No permission'); let productData = { name: pName.value.trim(), category: pCat.value, img: pImg.value.trim() || 'https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg', price: Number(pPrice.value) || 0, oldPrice: Number(pOldPrice.value) || 0, stock: Number(pStock.value) || 0, desc: pDesc.value.trim() }; if(!productData.name){ return alert('Please enter product name') } if(editingId){ set(ref(db, 'shrn_dee_biz/categories/' + editingId), productData).then(()=>{ alert('Product Updated!'); cancelEdit(); }).catch(err=> alert('Error: ' + err.message)); } else { let id = Date.now().toString(); set(ref(db, 'shrn_dee_biz/categories/' + id), productData).then(()=>{ [pName,pImg,pPrice,pOldPrice,pStock,pDesc].forEach(i=>i.value=''); alert('Product Added!'); }).catch(err=> alert('Error: ' + err.message)); } }
+  window.saveProduct = () => { if(currentUser.role == 'reception') return alert('No permission'); let productData = { name: pName.value.trim(), category: pCat.value, img: pImg.value.trim() || 'https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg', price: Number(pPrice.value) || 0, oldPrice: Number(pOldPrice.value) || 0, stock: Number(pStock.value) || 0, desc: pDesc.value.trim() }; if(!productData.name){ return alert('Please enter product name') } if(editingId){ set(ref(db, 'shrn_dee_biz/categories/' + editingId), productData).then(()=>{ alert('Product Updated!'); cancelEdit(); }).catch(err=> alert('Error: ' + err.message)); } else { let id = Date.now().toString(); set(ref(db, 'shrn_dee_biz/categories/' + id), productData).then(()=>{ [pName,pImg,pPrice,pOldPrice,pStock,pDesc].forEach(i=>i.value=''); alert('Product Added!'); }).catch(err=> alert('Error: ' + err.message)); } }
 
   function buildStockList(){ stockList.innerHTML = ''; Object.entries(products).forEach(([id,p])=>{ stockList.innerHTML += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;border:1px solid var(--border);border-radius:8px;margin:5px 0"><div><b>${p.name}</b><br><small class="${p.stock<10?'stock-low':''}">Stock: ${p.stock}</small></div><div><input type="number" id="stock_${id}" value="0" style="width:80px"><button class="btn-green" onclick="updateStock('${id}')">+ Add</button></div></div>`; }) }
 
   window.seedDatabase = () => {
     if(currentUser.role!= 'ceo' && currentUser.role!= 'manager') return alert('No permission');
     const defaultData = [
-      {name:"Avon Fragrance Perfume", category:"Avon", price:180, stock:50, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Long lasting scent"},
-      {name:"Avroy Shlein Face Cream", category:"Avroy Shlein", price:250, stock:30, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Anti-aging, removes wrinkles"},
-      {name:"Inuka Perfume", category:"Inuka", price:200, stock:40, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Luxury fragrance"},
-      {name:"Necklace Set", category:"Jewellery", price:150, stock:20, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Fashion jewellery"},
-      {name:"Hand & Body Lotion", category:"Cosmetics", price:120, stock:60, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Smooth skin"},
-      {name:"Join Avon Team", category:"Recruitment", price:0, stock:999, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Become an Avon Ambassador"}
+      {name:"Avon Fragrance Perfume", category:"Avon", price:180, stock:50, img:"https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg", desc:"Long lasting scent"},
+      {name:"Avroy Shlein Face Cream", category:"Avroy Shlein", price:250, stock:30, img:"https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg", desc:"Anti-aging, removes wrinkles"},
+      {name:"Inuka Perfume", category:"Inuka", price:200, stock:40, img:"https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg", desc:"Luxury fragrance"},
+      {name:"Necklace Set", category:"Jewellery", price:150, stock:20, img:"https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg", desc:"Fashion jewellery"},
+      {name:"Hand & Body Lotion", category:"Cosmetics", price:120, stock:60, img:"https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg", desc:"Smooth skin"},
+      {name:"Join Avon Team", category:"Recruitment", price:0, stock:999, img:"https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg", desc:"Become an Avon Ambassador"}
     ];
     defaultData.forEach(p=>{ let id = Date.now().toString() + Math.random(); set(ref(db, 'shrn_dee_biz/categories/' + id), p); });
     alert('6 Default SHRN DEE products added to Firebase!')
