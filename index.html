@@ -236,8 +236,8 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
     <div class="footer-copy">© 2026 SHRN DEE PTY LTD. Beauty, Recruitment & Sales.</div>
   </footer>
 </div>
-
-<script type="module">
+      
+  <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getDatabase, ref, set, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
@@ -255,6 +255,9 @@ const firebaseConfig = {
   appId: "1:763353567853:web:1ff8c30af44685b81f6564",
   measurementId: "G-WG2NC45WXT"
 };
+
+// CHANGE THIS TO YOUR WHATSAPP NUMBER WITH COUNTRY CODE. Example: 2782xxxxxxx
+const BUSINESS_WHATSAPP = "YOUR_WHATSAPP_NUMBER_HERE";
 
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -371,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<div class="qty-controls"><button class="qty-btn" onclick="decreaseQty('${id}')">-</button><div class="qty-text">${item.qty}</div><button class="qty-btn" onclick="addToCart('${id}')">+</button></div>`;
   }
 
-        function renderProducts(){
+  function renderProducts(){
     productGrid.innerHTML = '';
     if(Object.keys(products).length === 0){ productGrid.innerHTML = `<p style="text-align:center;grid-column:1/-1">No products yet</p>`; return; }
     Object.entries(products).filter(([id,p])=>{
@@ -464,29 +467,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let custName = document.getElementById('invCustName').value || o.customerName || 'Guest';
     let custPhone = document.getElementById('invCustPhone').value || o.customerPhone || '';
     let custEmail = document.getElementById('invCustEmail').value || o.customerEmail || '';
-    let custAddress = document.getElementById('invCustAddress').value || '';
-    let addTax = document.getElementById('invTaxToggle').checked; let isPaid = document.getElementById('invPaidToggle').checked;
-    let subtotal = o.total; let tax = addTax? subtotal * 0.15 : 0; let grandTotal = subtotal + tax;
+
+    let itemsText = o.items.map(i=>`${i.name} x${i.qty} = R${i.price*i.qty}`).join('\n');
+
     const doc = new jsPDF();
-    doc.addImage('https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg', 'JPEG', 10, 10, 25, 25);
-    doc.setFontSize(16); doc.setFont(undefined, 'bold'); doc.text("SHRN DEE PTY LTD", 40, 18);
-    doc.setFontSize(9); doc.text("ceo@shrndee.co.za | Beauty Ambassador", 40, 24);
-    doc.line(10, 40, 200, 40);
-    doc.setFontSize(18); doc.setFont(undefined, 'bold'); doc.text("INVOICE", 150, 50);
-    doc.setFontSize(10); doc.text(`Invoice #: ${currentInvoiceId.slice(-6)}`, 150, 57);
-    doc.text(`Date: ${new Date(o.date).toLocaleDateString()}`, 150, 62);
-    doc.setFontSize(12); doc.text("BILL TO:", 10, 50); doc.setFontSize(10);
-    doc.text(custName, 10, 57); if(custPhone) doc.text(custPhone, 10, 62);
-    if(custEmail) doc.text(custEmail, 10, 67); if(custAddress) doc.text(custAddress, 10, 72);
-    let y = 90; doc.setFontSize(10); doc.setFont(undefined, 'bold');
-    doc.text("Description", 10, y); doc.text("Qty", 120, y); doc.text("Rate", 145, y); doc.text("Amount", 175, y);
-    y += 5; doc.line(10, y, 200, y); y += 7; doc.setFont(undefined, 'normal');
-    o.items.forEach(i=>{ doc.text(i.name.substring(0,35), 10, y); doc.text(i.qty.toString(), 120, y); doc.text(`R${i.price}`, 145, y); doc.text(`R${i.price*i.qty}`, 175, y); y += 7; });
-    y += 5; doc.line(120, y, 200, y); y += 7; doc.text("Subtotal:", 145, y); doc.text(`R${subtotal.toFixed(2)}`, 175, y); y += 7;
-    if(addTax){ doc.text("VAT 15%:", 145, y); doc.text(`R${tax.toFixed(2)}`, 175, y); y += 7; }
-    doc.setFont(undefined, 'bold'); doc.setFontSize(12); doc.text("TOTAL:", 145, y); doc.text(`R${grandTotal.toFixed(2)}`, 175, y);
-    if(isPaid){ doc.setFontSize(30); doc.setTextColor(0, 184, 148); doc.text("PAID", 80, 150, {angle: -30}); doc.setTextColor(0,0,0); }
-    doc.setFontSize(8); doc.text("Thank you for shopping with SHRN DEE PTY LTD", 105, 280, {align: "center"});
+    doc.setFontSize(16); doc.setFont(undefined, 'bold'); doc.text("SHRN DEE PTY LTD", 10, 15);
+    doc.setFontSize(11); doc.setFont(undefined, 'normal');
+    doc.text(`Name: ${custName}`, 10, 25);
+    doc.text(`Phone: ${custPhone}`, 10, 32);
+    doc.text(`Email: ${custEmail}`, 10, 39);
+    doc.text(`The Order:`, 10, 46);
+    let y = 53;
+    o.items.forEach(i=>{ doc.text(`- ${i.name} x${i.qty} = R${i.price*i.qty}`, 12, y); y+=7; });
+    doc.text(`Total: R${o.total.toFixed(2)}`, 10, y+3);
+    y+=12; doc.text(`Pay to: FNB 1234567890`, 10, y);
+    doc.text(`Send proof to WhatsApp: ${BUSINESS_WHATSAPP}`, 10, y+7);
+
     doc.save(`SHRNDEE-Invoice-${currentInvoiceId.slice(-6)}.pdf`); document.getElementById('invoiceModal').style.display='none';
   }
 
@@ -497,47 +493,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let item = document.getElementById('quickInvItem').value;
     let qty = Number(document.getElementById('quickInvQty').value) || 1;
     let price = Number(document.getElementById('quickInvPrice').value) || 0;
-    let addTax = document.getElementById('quickInvTax').checked;
-    let isPaid = document.getElementById('quickInvPaid').checked;
 
     if(!name ||!item ||!price) return alert('Please fill Name, Item and Price');
 
-    let subtotal = qty * price;
-    let tax = addTax? subtotal * 0.15 : 0;
-    let grandTotal = subtotal + tax;
+    let total = qty * price;
     let invId = Date.now().toString().slice(-6);
-    let orderId = Date.now().toString();
-
-    const order = {
-      user: 'Walk-In',
-      customerName: name,
-      customerPhone: phone,
-      customerEmail: email,
-      items: [{name: item, qty: qty, price: price}],
-      total: grandTotal,
-      date: new Date().toISOString(),
-      status: isPaid? 'Completed' : 'Pending'
-    };
-    set(ref(db, 'shrn_dee_biz/requests/' + orderId), order);
 
     const doc = new jsPDF();
-    doc.addImage('https://i.ibb.co/k6mr518v/IMG-20260716-WA0007.jpg', 'JPEG', 10, 10, 25, 25);
-    doc.setFontSize(16); doc.setFont(undefined, 'bold'); doc.text("SHRN DEE PTY LTD", 40, 18);
-    doc.setFontSize(9); doc.text("ceo@shrndee.co.za | Beauty Ambassador", 40, 24); doc.line(10, 40, 200, 40);
-    doc.setFontSize(18); doc.setFont(undefined, 'bold'); doc.text("INVOICE", 150, 50);
-    doc.setFontSize(10); doc.text(`Invoice #: ${invId}`, 150, 57); doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 62);
-    doc.setFontSize(12); doc.text("BILL TO:", 10, 50); doc.setFontSize(10);
-    doc.text(name, 10, 57); if(phone) doc.text(phone, 10, 62); if(email) doc.text(email, 10, 67);
-    let y = 90; doc.setFont(undefined, 'bold'); doc.text("Description", 10, y); doc.text("Qty", 120, y); doc.text("Rate", 145, y); doc.text("Amount", 175, y);
-    y += 5; doc.line(10, y, 200, y); y += 7; doc.setFont(undefined, 'normal');
-    doc.text(item.substring(0,35), 10, y); doc.text(qty.toString(), 120, y); doc.text(`R${price}`, 145, y); doc.text(`R${subtotal}`, 175, y); y+=7;
-    y += 5; doc.line(120, y, 200, y); y += 7; doc.text("Subtotal:", 145, y); doc.text(`R${subtotal.toFixed(2)}`, 175, y); y += 7;
-    if(addTax){ doc.text("VAT 15%:", 145, y); doc.text(`R${tax.toFixed(2)}`, 175, y); y += 7; }
-    doc.setFont(undefined, 'bold'); doc.setFontSize(12); doc.text("TOTAL:", 145, y); doc.text(`R${grandTotal.toFixed(2)}`, 175, y);
-    if(isPaid){ doc.setFontSize(30); doc.setTextColor(0, 184, 148); doc.text("PAID", 80, 150, {angle: -30}); doc.setTextColor(0,0,0); }
-    doc.setFontSize(8); doc.text("Thank you for shopping with SHRN DEE PTY LTD", 105, 280, {align: "center"});
-    doc.save(`SHRNDEE-QuickInvoice-${invId}.pdf`);
+    doc.setFontSize(16); doc.setFont(undefined, 'bold'); doc.text("SHRN DEE PTY LTD", 10, 15);
+    doc.setFontSize(11); doc.setFont(undefined, 'normal');
+    doc.text(`Name: ${name}`, 10, 25);
+    doc.text(`Phone: ${phone}`, 10, 32);
+    doc.text(`Email: ${email}`, 10, 39);
+    doc.text(`The Order:`, 10, 46);
+    doc.text(`- ${item} x${qty} = R${total}`, 12, 53);
+    doc.text(`Total: R${total.toFixed(2)}`, 10, 60);
+    doc.text(`Pay to: FNB 1234567890`, 10, 67);
+    doc.text(`Send proof to WhatsApp: ${BUSINESS_WHATSAPP}`, 10, 74);
 
+    doc.save(`SHRNDEE-QuickInvoice-${invId}.pdf`);
     document.getElementById('quickInvoiceModal').style.display='none';
     alert('✅ Walk-In Invoice saved!')
   }
@@ -586,26 +560,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if(cartTotal) cartTotal.innerText = total; if(clientCartTotal) clientCartTotal.innerText = total;
   }
 
+  // UPDATED: Send Order now goes to WhatsApp for clients
   window.sendQuote = () => {
     let name = document.getElementById('custName').value;
     let phone = document.getElementById('custPhone').value;
     let email = document.getElementById('custEmail').value;
     if(!name ||!phone) return alert('Please enter Name and Phone');
+    if(BUSINESS_WHATSAPP === "YOUR_WHATSAPP_NUMBER_HERE") return alert('Please set your WhatsApp number in the code first');
+
+    let itemsText = cart.map(i=>`${i.name} x${i.qty} = R${i.price*i.qty}`).join('%0A');
     let total = cart.reduce((a,b)=>a+b.qty*b.price,0);
-    let orderId = Date.now().toString();
-    const order = {
-      user: 'Client',
-      customerName: name,
-      customerPhone: phone,
-      customerEmail: email,
-      items: cart,
-      total: total,
-      date: new Date().toISOString(),
-      status: 'Pending'
-    };
-    set(ref(db, 'shrn_dee_biz/requests/' + orderId), order);
+
+    let message = `*NEW ORDER - SHRN DEE PTY LTD*%0A%0A`;
+    message += `*Name:* ${name}%0A`;
+    message += `*Phone:* ${phone}%0A`;
+    message += `*Email:* ${email}%0A%0A`;
+    message += `*The Order:*%0A${itemsText}%0A%0A`;
+    message += `*Total: R${total.toFixed(2)}*`;
+
+    window.open(`https://wa.me/${BUSINESS_WHATSAPP}?text=${message}`, '_blank');
+
     cart = []; updateCart(); document.getElementById('customerModal').style.display='none';
-    alert('✅ Order sent! We will contact you soon.');
+    alert('✅ Opening WhatsApp to send your order');
   }
 
   window.openCustomerModal = () => { if(cart.length === 0) return alert('Cart empty'); document.getElementById('customerModal').style.display = 'flex'; }
@@ -636,5 +612,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode');
 });
 </script>
+    
 </body>
 </html>
