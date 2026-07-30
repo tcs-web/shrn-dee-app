@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHRN DEE PTY LTD | Beauty, Cosmetics & Recruitment</title>
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU0hSTiBERSBQVFkgTFREIiwic2hvcnRfbmFtZSI6IlNIUk4gREUiLCJzdGFydF91cmwiOiIiLCAiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzg5MDg4OSIsInRoZW1lX2NvbG9yIjoiIzg5MDg4OSIsImljb25zIjpbeyJzcmMiOiJodHRwczovL2kuZWJiLmNvL1FqdFNuMURSL0lNRy0yMDI2MDcyOFdBMzUyLmpwZyIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9qcGVnIn1dfQ==">
+<meta name="theme-color" content="#890889">
+<link rel="apple-touch-icon" href="https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+:root{--bg:#f5f5f5;--card:#fff;--accent:#890889;--accent2:#C2185B;--green:#00b894;--blue:#1976D2;--purple:#6c5ce7;--text:#2d3436;--muted:#636e72;--border:#dfe6e9;--shadow:0 2px 8px rgba(0,0,0,0.1);--danger:#d63031}
+*{box-sizing:border-box;font-family:'Poppins',sans-serif}body{margin:0;background:var(--bg);color:var(--text)}
+html, body{overflow-x:hidden; width:100%}
+.header{background:linear-gradient(90deg,#890889,#C2185B);padding:12px;color:#fff;position:sticky;top:0;z-index:99;box-shadow:var(--shadow)}
+.header-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.logo{width:45px;height:45px;border-radius:10px;background:#fff;padding:4px;object-fit:cover}
+.search-box{flex:1;background:#fff;border-radius:25px;padding:8px 15px;display:flex;align-items:center}
+.search-box input{border:none;outline:none;width:100%;background:transparent;color:#000}
+.nav-cats{display:flex;gap:15px;overflow-x:auto;margin-top:10px;padding-bottom:5px;padding-right:15px}
+.nav-cats button{background:rgba(255,255,255,0.2);border:none;color:#fff;padding:6px 12px;border-radius:20px;font-weight:600;cursor:pointer;white-space:nowrap}
+
+/* ENHANCED: Client category buttons now visible - Black on White */
+#clientView.nav-cats button{background:#fff!important;color:#000!important;border:1px solid #ccc!important;opacity:1!important;}
+#clientView.nav-cats button:hover{background:var(--accent)!important;color:#fff!important;}
+#clientView.nav-cats button.active{background:var(--accent)!important;color:#fff!important;border-bottom:2px solid #000!important;font-weight:700!important;}
+
+.container{max-width:100%;margin:0 auto;padding:10px}
+.banner{background:linear-gradient(135deg,#890889,#C2185B);color:#fff;padding:20px;border-radius:15px;text-align:center;margin:15px 0;font-weight:800;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.card{display:flex;flex-direction:column;min-height:380px;background:var(--card);border-radius:12px;padding:10px;box-shadow:var(--shadow);position:relative;overflow-wrap:anywhere;word-break:break-word}
+.card h4{margin:8px 0;font-size:13px;height:auto;min-height:36px;overflow:hidden}
+.price{color:var(--accent);font-weight:800;font-size:16px;margin-top:auto}
+.btn-cart,.btn-oos{margin-top:8px}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+.card-imgs{display:flex;gap:4px;margin-top:5px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.card-imgs::-webkit-scrollbar{height:4px}
+.card-imgs::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+.card-imgs img{width:45px;height:45px;border-radius:6px;object-fit:cover;flex-shrink:0;cursor:pointer;border:2px solid transparent}
+.card-imgs img.active{border:2px solid var(--accent)}
+.old-price{text-decoration:line-through;color:var(--muted);font-size:11px}
+.stock{font-size:10px;color:var(--green)}
+.stock-low{color:var(--danger);font-weight:700}
+.btn-cart{background:var(--accent);color:#fff;border:none;width:100%;padding:8px;border-radius:8px;font-weight:700;cursor:pointer}
+.btn-oos{background:#ccc;color:#fff;border:none;width:100%;padding:8px;border-radius:8px;font-weight:700;cursor:not-allowed}
+.qty-controls{display:flex;gap:5px;align-items:center;margin-top:8px}
+.qty-btn{background:var(--accent);color:#fff;border:none;width:32px;height:32px;border-radius:8px;font-weight:800;cursor:pointer;font-size:16px}
+.qty-text{background:#f5f5f5;border:1px solid var(--border);padding:6px 10px;border-radius:8px;font-weight:700;min-width:40px;text-align:center}
+.admin{background:#fff;padding:15px;border-radius:12px;margin:15px 0;box-shadow:var(--shadow);overflow-x:hidden}
+.login-box{max-width:400px;margin:40px auto;background:#fff;padding:25px;border-radius:15px;box-shadow:var(--shadow)}
+.login-box h2{text-align:center;color:var(--accent)}
+.role-badge{padding:4px 10px;border-radius:15px;font-size:10px;font-weight:800;color:#fff}
+.role-ceo{background:var(--purple)}.role-manager{background:var(--blue)}.role-sales{background:var(--accent2)}.role-reception{background:var(--green)}
+.tabs{display:flex;gap:8px;border-bottom:2px solid var(--border);margin-bottom:15px;overflow-x:auto;padding-right:10px}
+.tab{padding:10px 15px;cursor:pointer;font-weight:600;white-space:nowrap}
+.tab.active{border-bottom:3px solid var(--accent);color:var(--accent)}
+input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(--border);border-radius:8px}
+.btn{background:var(--accent);color:#fff;border:none;padding:10px 15px;border-radius:8px;font-weight:700;cursor:pointer}
+.btn-blue{background:var(--blue)}.btn-green{background:var(--green)}.btn-purple{background:var(--purple)}.btn-gray{background:var(--muted)}.btn-danger{background:var(--danger)}
+.cart-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;padding:12px;box-shadow:0 -2px 10px rgba(0,0,0,0.2);display:none;z-index:100}
+.loading{text-align:center;padding:40px}
+.error{color:var(--accent);text-align:center;padding:10px}
+.admin-search{margin:10px 0 15px 0}
+.order-card{background:#fff;padding:12px;border-radius:10px;margin:10px 0;border-left:4px solid var(--accent);overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:15px}
+.stat-card{background:linear-gradient(135deg,#890889,#C2185B);color:#fff;padding:15px;border-radius:10px;text-align:center}
+.stat-card h4{margin:0;font-size:24px}
+.install-banner{background:var(--blue);color:#fff;padding:12px;border-radius:10px;margin:10px 0;text-align:center;display:none;animation:slideDown 0.3s}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)}}
+.client-header{text-align:center;padding:15px;background:linear-gradient(90deg,#890889,#C2185B);color:#fff}
+.brand-tag{background:#f3e5f5;padding:4px 8px;border-radius:15px;font-size:10px;margin:2px 2px;display:inline-block}
+.client-link{margin:15px 0;padding:12px;background:#f3e5f5;border-radius:10px;text-align:center;font-size:12px}
+.site-footer{background:#2d3436;color:#fff;padding:8px 10px;text-align:center;margin-top:20px;font-size:9px;line-height:1.4}
+.footer-title{font-size:10px;font-weight:700;margin-bottom:2px}
+.footer-line{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:1px 0}
+.footer-line a{color:#ce93d8;text-decoration:none;font-size:9px}
+.footer-line a:hover{text-decoration:underline}
+.footer-copy{margin-top:2px;font-size:8px;opacity:0.5}
+.bank-details{margin-top:4px;padding-top:4px;border-top:1px solid #444}
+.dark-mode{--bg:#1a1a1a;--card:#2d3436;--text:#fff;--border:#444}
+.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:999}
+.modal-content{background:var(--card);padding:20px;border-radius:15px;width:90%;max-width:400px}
+@media(max-width:600px){
+.grid{grid-template-columns:1fr!important}
+.stats{grid-template-columns:repeat(2,1fr)}
+.tabs{font-size:12px}
+.tab{padding:8px 10px}
+.card-imgs img{width:38px;height:38px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div id="installBanner" class="install-banner">
+  📲 <b>Install SHRN DEE App</b> - Shop faster
+  <button class="btn" style="padding:5px 10px;margin-left:10px;background:#fff;color:var(--blue)" id="installBtn">Install</button>
+  <button onclick="document.getElementById('installBanner').style.display='none'" style="background:none;border:none;color:#fff;font-size:18px;float:right">x</button>
+</div>
+
+<div id="quickInvoiceModal" class="modal"> <div class="modal-content"> <h3>🧾 Quick Invoice - Walk In</h3> <input type="text" id="quickInvName" placeholder="Customer Name"> <input type="tel" id="quickInvPhone" placeholder="Customer Phone"> <input type="email" id="quickInvEmail" placeholder="Customer Email"> <input type="text" id="quickInvItem" placeholder="Item/Service Name"> <input type="number" id="quickInvQty" placeholder="Qty" value="1"> <input type="number" id="quickInvPrice" placeholder="Price R"> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="quickInvTax"> Add 15% VAT</label> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="quickInvPaid" checked> Mark as PAID</label> <button class="btn" onclick="downloadQuickInvoice()" style="width:100%">Download Invoice PDF</button> <button class="btn-gray" onclick="document.getElementById('quickInvoiceModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
+<div id="invoiceModal" class="modal"> <div class="modal-content"> <h3>📄 Edit Invoice Details</h3> <input type="text" id="invCustName" placeholder="Customer Name"> <input type="tel" id="invCustPhone" placeholder="Customer Phone"> <input type="email" id="invCustEmail" placeholder="Customer Email"> <input type="text" id="invCustAddress" placeholder="Customer Address"> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="invTaxToggle"> Add 15% VAT</label> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="invPaidToggle"> Mark as PAID</label> <button class="btn" onclick="downloadFinalInvoice()" style="width:100%">Download Invoice PDF</button> <button class="btn-gray" onclick="document.getElementById('invoiceModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
+<div id="customerModal" class="modal"> <div class="modal-content"> <h3>Customer Details</h3> <input type="text" id="custName" placeholder="Your Name"> <input type="tel" id="custPhone" placeholder="Your Phone Number"> <input type="email" id="custEmail" placeholder="Your Email Address"> <button class="btn" onclick="sendQuote()" style="width:100%">Send Order Request</button> <button class="btn-gray" onclick="document.getElementById('customerModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
+
+<div id="clientView" style="display:none">
+  <div class="client-header">
+    <img src="https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg" class="logo" style="margin:0 auto">
+    <h2>SHRN DEE PTY LTD</h2>
+    <p style="font-size:12px;margin:5px 0">Beauty Advisor | Independent Ambassador</p>
+    <div class="search-box" style="max-width:500px;margin:10px auto"><input type="text" id="clientSearchInput" placeholder="Search products..." onkeyup="searchProducts()"></div>
+  </div>
+  <div class="container">
+    <div class="client-link"><b>📲 Share this with clients:</b><br><code id="clientLink"></code></div>
+    <div class="banner">✨ BEAUTY, COSMETICS & OPPORTUNITY ✨</div>
+    <div class="nav-cats">
+      <button onclick="filterCat('All', event)">All</button>
+      <button onclick="filterCat('Avon', event)">Avon</button>
+      <button onclick="filterCat('Avroy Shlein', event)">Avroy Shlein</button>
+      <button onclick="filterCat('Inuka', event)">Inuka</button>
+      <button onclick="filterCat('Jewellery', event)">Jewellery</button>
+      <button onclick="filterCat('Cosmetics', event)">Cosmetics</button>
+    </div>
+    <h2 style="margin:20px 0">🛍️ Our Products & Services</h2>
+    <div class="grid" id="clientProductGrid"><div class="loading">Loading products...</div></div>
+  </div>
+  <div class="cart-bar" id="clientCartBar">
+    <b>Cart: <span id="clientCartCount">0</span> | Total: R<span id="clientCartTotal">0</span></b>
+    <button class="btn" onclick="openCustomerModal()">Send Order</button>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-title">SHRN DEE PTY LTD</div>
+    <div class="footer-line">📧 <a href="mailto:ceo@shrndee.co.za">ceo@shrndee.co.za</a></div>
+    <div class="footer-line">🤝 Avon | Avroy Shlein | Inuka Ambassador</div>
+    <div class="footer-copy">© 2026 SHRN DEE PTY LTD. Beauty, Recruitment & Sales.</div>
+  </footer>
+</div>
+
+<div id="loginScreen">
+  <div class="login-box">
+    <img src="https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg" style="width:80px;margin:0 auto;display:block;border-radius:15px">
+    <h2>SHRN DEE PTY LTD BIZPORTAL</h2>
+    <div id="loginError" class="error"></div>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPass" placeholder="Password">
+    <button class="btn" onclick="doLogin()" style="width:100%">Login</button>
+  </div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="header">
+    <div class="header-top">
+      <img src="https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg" class="logo">
+      <div class="search-box"><input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()"></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn" style="padding:5px 10px;font-size:12px;background:#fff;color:var(--blue)" onclick="toggleDark()">🌙</button>
+        <span class="role-badge" id="userRole">ADMIN</span><button class="btn" style="padding:5px 10px;font-size:12px" onclick="logout()">Logout</button>
+      </div>
+    </div>
+    <div class="nav-cats">
+      <button onclick="filterCat('All', event)">All</button>
+      <button onclick="filterCat('Avon', event)">Avon</button>
+      <button onclick="filterCat('Avroy Shlein', event)">Avroy Shlein</button>
+      <button onclick="filterCat('Inuka', event)">Inuka</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="banner">✨ BEAUTY, COSMETICS & OPPORTUNITY ✨</div>
+    <div class="admin" id="adminPanel">
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('dashboard', this)">Dashboard</div>
+        <div class="tab" onclick="showTab('products', this)">Products</div>
+        <div class="tab" onclick="showTab('stock', this)">Stock</div>
+        <div class="tab" onclick="showTab('orders', this)">Orders</div>
+        <div class="tab" id="usersTab" onclick="showTab('users', this)">Users</div>
+        <div class="tab" onclick="showTab('reports', this)">Reports</div>
+      </div>
+      <div id="tab-dashboard">
+        <h3>📊 Dashboard</h3>
+        <div class="stats">
+          <div class="stat-card"><h4 id="statProducts">0</h4><small>Total Products</small></div>
+          <div class="stat-card"><h4 id="statStock">0</h4><small>Total Stock</small></div>
+          <div class="stat-card"><h4 id="statOrders">0</h4><small>Pending Orders</small></div>
+        </div>
+        <button class="btn-blue" onclick="document.getElementById('quickInvoiceModal').style.display='flex'" style="margin-bottom:15px">🧾 Quick Invoice</button>
+        <div class="admin" style="background:#f3e5f5;border-left:4px solid var(--blue);margin-top:15px">
+          <h4>📲 Share Client Shop Link</h4>
+          <p style="font-size:12px;color:var(--muted)">Send this link to clients so they can browse + order</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input type="text" id="clientShareLink" readonly style="flex:1;min-width:200px">
+            <button class="btn" onclick="copyClientLink()">Copy</button>
+            <button class="btn-green" onclick="shareClientWhatsApp()">WhatsApp</button>
+          </div>
+        </div>
+        <h4 style="margin-top:15px">⚠️ Low Stock Alert</h4>
+        <div id="lowStockList"></div>
+      </div>
+      <div id="tab-products" style="display:none">
+        <h3 id="formTitle">➕ Add Product</h3>
+        <button class="btn-purple" onclick="seedDatabase()">⚡ Add Default Products</button>
+        <input type="text" id="pName" placeholder="Product Name">
+        <select id="pCat">
+          <option>Avon</option><option>Avroy Shlein</option><option>Inuka</option>
+          <option>Jewellery</option><option>Cosmetics</option><option>Hair Care</option>
+          <option>Skin Care</option><option>Foot Care</option><option>Luggage & Bags</option>
+          <option>Makeup</option><option>Face Wash</option><option>Sunscreen</option>
+          <option>Nail Products</option><option>Women Hygiene</option><option>Cloves Leaf</option>
+          <option>Recruitment</option>
+        </select>
+        <input type="text" id="pImg" placeholder="Image URL 1, Image URL 2">
+        <input type="number" id="pPrice" placeholder="Price R">
+        <input type="number" id="pOldPrice" placeholder="Old Price R">
+        <input type="number" id="pStock" placeholder="Stock/Availability">
+        <textarea id="pDesc" placeholder="Details e.g. Brand, Size, Benefits"></textarea>
+        <div style="display:flex;gap:10px">
+          <button class="btn" id="saveBtn" onclick="saveProduct()" style="flex:1">Save Product</button>
+          <button class="btn-gray" id="cancelBtn" onclick="cancelEdit()" style="flex:1;display:none">Cancel</button>
+        </div>
+        <h3 style="margin-top:20px">📋 Manage Products</h3>
+        <input type="text" id="adminSearch" class="admin-search" placeholder="🔍 Search...">
+        <div id="productList"></div>
+      </div>
+      <div id="tab-stock" style="display:none"><h3>📦 Stock Management</h3><div id="stockList"></div></div>
+      <div id="tab-orders" style="display:none"><h3>📦 Customer Orders</h3><div id="ordersList">Loading orders...</div></div>
+      <div id="tab-users" style="display:none"><h3>👥 Users & Roles</h3><p><b>CEO:</b> ceo@shrndee.co.za - Full access</p><p><b>Manager:</b> manager@shrndee.co.za - Add/Edit/Delete</p><p><b>Reception:</b> reception@shrndee.co.za - View Orders</p></div>
+      <div id="tab-reports" style="display:none"><h3>📊 Reports</h3><button class="btn-purple" onclick="downloadReport()">Download PDF Report</button> <button class="btn-green" onclick="downloadCSV()">Download CSV Spreadsheet</button></div>
+    </div>
+    <h2 style="margin:20px 0">⭐ Featured Products</h2>
+    <div class="grid" id="productGrid"><div class="loading">Loading products...</div></div>
+  </div>
+  <div class="cart-bar" id="cartBar">
+    <b>Cart: <span id="cartCount">0</span> | Total: R<span id="cartTotal">0</span></b>
+    <button class="btn" onclick="openCustomerModal()">Send Order</button>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-title">SHRN DEE PTY LTD</div>
+    <div class="footer-line">📧 <a href="mailto:ceo@shrndee.co.za">ceo@shrndee.co.za</a></div>
+    <div class="footer-line">🤝 Avon | Avroy Shlein | Inuka Ambassador</div>
+    <div class="footer-copy">© 2026 SHRN DEE PTY LTD. Beauty, Recruitment & Sales.</div>
+  </footer>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getDatabase, ref, set, onValue, remove } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
+const { jsPDF } = window.jspdf;
+
+// YOUR SHRN DEE FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyDvLNZopxi62-06znW9zUxkqnnATq8AdnM",
+  authDomain: "shrn-dee-biz.firebaseapp.com",
+  databaseURL: "https://shrn-dee-biz-default-rtdb.firebaseio.com",
+  projectId: "shrn-dee-biz",
+  storageBucket: "shrn-dee-biz.firebasestorage.app",
+  messagingSenderId: "763353567853",
+  appId: "1:763353567853:web:1ff8c30af44685b81f6564",
+  measurementId: "G-WG2NC45WXT"
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isClientMode = urlParams.has('client');
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase(app);
+  const auth = getAuth(app);
+  const productsRef = ref(db, 'shrn_dee_biz/categories');
+  const ordersRef = ref(db, 'shrn_dee_biz/requests');
+  let products = {}; let orders = {}; let cart = [];
+  let currentUser = {role:'reception'}; let currentFilter = 'All'; let editingId = null; let deferredPrompt; let currentInvoiceId = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBanner').style.display = 'block';
+  });
+  setTimeout(()=>{ if(!deferredPrompt) document.getElementById('installBanner').style.display = 'block'; }, 3000);
+
+  document.getElementById('installBtn').onclick = () => {
+    if(deferredPrompt){
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        document.getElementById('installBanner').style.display = 'none';
+      });
+    } else {
+      alert('Install: Chrome Menu > Install App. Must be on HTTPS to work properly.')
+    }
+  };
+
+  if(isClientMode){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('clientView').style.display = 'block';
+    document.getElementById('clientLink').innerText = window.location.origin + window.location.pathname + '?client=1';
+  }
+
+  const loginScreen = document.getElementById('loginScreen');
+  const appDiv = document.getElementById('app');
+  const loginError = document.getElementById('loginError');
+  const loginEmail = document.getElementById('loginEmail');
+  const loginPass = document.getElementById('loginPass');
+  const clientProductGrid = document.getElementById('clientProductGrid');
+  const productGrid = document.getElementById('productGrid');
+  const productList = document.getElementById('productList');
+  const stockList = document.getElementById('stockList');
+  const ordersList = document.getElementById('ordersList');
+  const lowStockList = document.getElementById('lowStockList');
+  const searchInput = document.getElementById('searchInput');
+  const clientSearchInput = document.getElementById('clientSearchInput');
+  const adminSearch = document.getElementById('adminSearch');
+  const cartBar = document.getElementById('cartBar');
+  const clientCartBar = document.getElementById('clientCartBar');
+  const cartCount = document.getElementById('cartCount');
+  const clientCartCount = document.getElementById('clientCartCount');
+  const cartTotal = document.getElementById('cartTotal');
+  const clientCartTotal = document.getElementById('clientCartTotal');
+  const pName = document.getElementById('pName'); const pCat = document.getElementById('pCat');
+  const pImg = document.getElementById('pImg');
+  const pPrice = document.getElementById('pPrice');
+  const pOldPrice = document.getElementById('pOldPrice'); const pStock = document.getElementById('pStock');
+  const pDesc = document.getElementById('pDesc'); const saveBtn = document.getElementById('saveBtn');
+  const cancelBtn = document.getElementById('cancelBtn'); const formTitle = document.getElementById('formTitle');
+
+  if(adminSearch) adminSearch.addEventListener('keyup', buildProductList);
+  window.doLogin = async () => { loginError.innerText = 'Logging in...'; try{ await signInWithEmailAndPassword(auth, loginEmail.value, loginPass.value); } catch(e){ loginError.innerText = 'Login failed: ' + e.message } }
+  window.logout = () => { signOut(auth) }
+
+  onAuthStateChanged(auth, async user => {
+    if(isClientMode) return;
+    if(user){
+      let role = 'reception';
+      if(user.email === 'ceo@shrndee.co.za') role = 'ceo';
+      else if(user.email === 'manager@shrndee.co.za') role = 'manager';
+      currentUser = {email: user.email, role: role};
+      loginScreen.style.display = 'none'; appDiv.style.display = 'block';
+      document.getElementById('userRole').innerText = currentUser.role.toUpperCase();
+      document.getElementById('userRole').className = 'role-badge role-' + currentUser.role;
+      if(currentUser.role == 'reception') document.getElementById('usersTab').style.display = 'none';
+      buildProductList(); buildStockList(); buildOrders(); updateDashboard(); setClientLink();
+    } else { loginScreen.style.display = 'block'; appDiv.style.display = 'none'; }
+  })
+
+  window.showTab = (tab, el) => {
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+    ['dashboard','products','stock','orders','users','reports'].forEach(t=>{
+      document.getElementById('tab-'+t).style.display = t==tab?'block':'none'
+    })
+  }
+
+  onValue(productsRef, snap => { products = snap.val() || {}; renderProducts(); renderClientProducts(); buildProductList(); buildStockList(); updateDashboard(); })
+  onValue(ordersRef, snap => { orders = snap.val() || {}; buildOrders(); updateDashboard(); })
+
+  function updateDashboard(){
+    document.getElementById('statProducts').innerText = Object.keys(products).length;
+    document.getElementById('statStock').innerText = Object.values(products).reduce((a,b)=>a+(b.stock||0),0);
+    document.getElementById('statOrders').innerText = Object.values(orders).filter(o=>o.status=='Pending').length;
+    lowStockList.innerHTML = '';
+    Object.entries(products).filter(([id,p])=>p.stock < 10).forEach(([id,p])=>{
+      lowStockList.innerHTML += `<div style="padding:8px;background:#ffe6e6;border-radius:8px;margin:5px 0"><b>${p.name}</b> - <span style="color:var(--danger);font-weight:700">Only ${p.stock} left!</span></div>`
+    })
+    if(lowStockList.innerHTML=='') lowStockList.innerHTML = '<p style="color:var(--green)">All stock levels good ✅</p>'
+  }
+
+  function getImages(p){ if(!p.img) return ['https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg']; return p.img.split(',').map(s=>s.trim()).filter(s=>s); }
+  window.switchImage = (cardId, imgUrl, thumb) => { document.getElementById('main_'+cardId).src = imgUrl; document.querySelectorAll(`#card_${cardId}.card-imgs img`).forEach(i=>i.classList.remove('active')); thumb.classList.add('active'); }
+
+  function getCartControls(id){
+    let item = cart.find(x=>x.id==id);
+    if(!item) return `<button class="btn-cart" onclick="addToCart('${id}')">Add to Cart</button>`;
+    return `<div class="qty-controls"><button class="qty-btn" onclick="decreaseQty('${id}')">-</button><div class="qty-text">${item.qty}</div><button class="qty-btn" onclick="addToCart('${id}')">+</button></div>`;
+  }
+
+    function renderProducts(){
+    productGrid.innerHTML = '';
+    if(Object.keys(products).length === 0){ productGrid.innerHTML = `<p style="text-align:center;grid-column:1/-1">No products yet</p>`; return; }
+    Object.entries(products).filter(([id,p])=>{
+      let matchCat = currentFilter =='All' || p.category == currentFilter;
+      let matchSearch = p.name.toLowerCase().includes(searchInput.value.toLowerCase());
+      return matchCat && matchSearch;
+    }).forEach(([id,p])=>{
+      let imgs = getImages(p); let mainImg = imgs[0];
+      let extraImgs = imgs.map((u,i)=>`<img src="${u}" class="${i==0?'active':''}" onclick="switchImage('${id}','${u}',this)" onerror="this.style.display='none'">`).join('');
+      let brands = p.desc? p.desc.split(',').map(b=>`<span class="brand-tag">${b}</span>`).join('') : '';
+      let cartBtn = p.stock >0? getCartControls(id) : `<button class="btn-oos" disabled>Out of Stock</button>`;
+      productGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">R${p.price} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div><div class="stock ${p.stock<10?'stock-low':''}">Stock: ${p.stock}</div>${cartBtn}</div>`;
+    })
+  }
+
+  function renderClientProducts(){
+    if(!isClientMode) return;
+    clientProductGrid.innerHTML = '';
+    if(Object.keys(products).length === 0){ clientProductGrid.innerHTML = `<p style="text-align:center;grid-column:1/-1">No products yet</p>`; return; }
+    Object.entries(products).filter(([id,p])=>{
+      let matchCat = currentFilter == 'All' || p.category == currentFilter;
+      let matchSearch = p.name.toLowerCase().includes(clientSearchInput.value.toLowerCase());
+      return matchCat && matchSearch;
+    }).forEach(([id,p])=>{
+      let imgs = getImages(p); let mainImg = imgs[0];
+      let extraImgs = imgs.map((u,i)=>`<img src="${u}" class="${i==0?'active':''}" onclick="switchImage('${id}','${u}',this)" onerror="this.style.display='none'">`).join('');
+      let brands = p.desc? p.desc.split(',').map(b=>`<span class="brand-tag">${b}</span>`).join('') : '';
+      let cartBtn = p.stock > 0? getCartControls(id) : `<button class="btn-oos" disabled>Out of Stock</button>`;
+      clientProductGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">R${p.price} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div><div class="stock ${p.stock<10?'stock-low':''}">Stock: ${p.stock}</div>${cartBtn}</div>`;
+    })
+  }
+
+  window.searchProducts = () => { renderProducts(); renderClientProducts(); }
+  window.filterCat = (cat, e) => {
+    currentFilter=cat;
+    renderProducts();
+    renderClientProducts();
+    document.querySelectorAll('.nav-cats button').forEach(b=>b.classList.remove('active'));
+    if(e) e.target.classList.add('active');
+  }
+
+  function buildProductList(){
+    if(currentUser.role == 'reception') return;
+    productList.innerHTML = '';
+    let searchTerm = adminSearch.value.toLowerCase();
+    Object.entries(products).filter(([id,p])=>{
+      return p.name.toLowerCase().includes(searchTerm) || p.category.toLowerCase().includes(searchTerm)
+    }).forEach(([id,p])=>{
+      productList.innerHTML += `<div style="padding:10px;border:1px solid var(--border);border-radius:8px;margin:5px 0;background:#fafafa"><b>${p.name}</b> - R${p.price} - Stock: ${p.stock} - <small>${p.category}</small><div style="float:right;gap:5px;display:flex"><button onclick="editProduct('${id}')" class="btn-blue" style="padding:5px 10px;font-size:12px">Edit</button>${currentUser.role== 'ceo'? `<button onclick="deleteProduct('${id}')" class="btn-danger" style="padding:5px 10px;font-size:12px">Del</button>` : ''}</div></div>`;
+    })
+    if(productList.innerHTML === '') productList.innerHTML = '<p style="text-align:center;color:var(--muted)">No products found</p>'
+  }
+
+  function buildOrders(){
+    if(currentUser.role == 'reception') return;
+    ordersList.innerHTML = '';
+    if(Object.keys(orders).length === 0){ ordersList.innerHTML = '<p>No orders yet</p>'; return; }
+    Object.entries(orders).reverse().forEach(([id,o])=>{
+      let statusColor = o.status=='Completed'? 'var(--green)' : 'var(--accent)';
+      ordersList.innerHTML += `
+      <div class="order-card">
+        <b>Order #${id.slice(-6)}</b> - R${o.total} - <span style="color:${statusColor};font-weight:700">${o.status}</span><br>
+        <small>${new Date(o.date).toLocaleString()}</small><br>
+        <small><b>Customer:</b> ${o.customerName || 'Guest'} | ${o.customerPhone || o.user} | ${o.customerEmail || ''}</small><br>
+        <small>${o.items.map(i=>`${i.name} x${i.qty}`).join(', ')}</small><br>
+        <div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap">
+          <button class="btn-blue" onclick="openInvoiceModal('${id}')">📄 Invoice</button>
+          <button class="btn-green" onclick="updateOrderStatus('${id}','Completed')">Mark Complete</button>
+          <button class="btn-gray" onclick="updateOrderStatus('${id}','Pending')">Mark Pending</button>
+          ${currentUser.role== 'ceo' || currentUser.role== 'manager'? `<button class="btn-danger" onclick="deleteOrder('${id}')">Delete</button>` : ''}
+        </div>
+      </div>`;
+    })
+  }
+
+  window.updateOrderStatus = (id, status) => { set(ref(db, 'shrn_dee_biz/requests/' + id + '/status'), status); }
+  window.deleteOrder = (id) => { if(currentUser.role!= 'ceo' && currentUser.role!= 'manager') return alert('No permission'); if(confirm('Delete this order?')) remove(ref(db, 'shrn_dee_biz/requests/' + id)) }
+
+  window.openInvoiceModal = (id) => {
+    currentInvoiceId = id; let o = orders[id];
+    document.getElementById('invCustName').value = o.customerName || '';
+    document.getElementById('invCustPhone').value = o.customerPhone || '';
+    document.getElementById('invCustEmail').value = o.customerEmail || '';
+    document.getElementById('invCustAddress').value = o.customerAddress || '';
+    document.getElementById('invoiceModal').style.display = 'flex';
+  }
+
+  window.downloadFinalInvoice = () => {
+    let o = orders[currentInvoiceId];
+    let custName = document.getElementById('invCustName').value || o.customerName || 'Guest';
+    let custPhone = document.getElementById('invCustPhone').value || o.customerPhone || '';
+    let custEmail = document.getElementById('invCustEmail').value || o.customerEmail || '';
+    let custAddress = document.getElementById('invCustAddress').value || '';
+    let addTax = document.getElementById('invTaxToggle').checked; let isPaid = document.getElementById('invPaidToggle').checked;
+    let subtotal = o.total; let tax = addTax? subtotal * 0.15 : 0; let grandTotal = subtotal + tax;
+    const doc = new jsPDF();
+    doc.addImage('https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg', 'JPEG', 10, 10, 25, 25);
+    doc.setFontSize(16); doc.setFont(undefined, 'bold'); doc.text("SHRN DEE PTY LTD", 40, 18);
+    doc.setFontSize(9); doc.text("ceo@shrndee.co.za | Beauty Ambassador", 40, 24);
+    doc.line(10, 40, 200, 40);
+    doc.setFontSize(18); doc.setFont(undefined, 'bold'); doc.text("INVOICE", 150, 50);
+    doc.setFontSize(10); doc.text(`Invoice #: ${currentInvoiceId.slice(-6)}`, 150, 57);
+    doc.text(`Date: ${new Date(o.date).toLocaleDateString()}`, 150, 62);
+    doc.setFontSize(12); doc.text("BILL TO:", 10, 50); doc.setFontSize(10);
+    doc.text(custName, 10, 57); if(custPhone) doc.text(custPhone, 10, 62);
+    if(custEmail) doc.text(custEmail, 10, 67); if(custAddress) doc.text(custAddress, 10, 72);
+    let y = 90; doc.setFontSize(10); doc.setFont(undefined, 'bold');
+    doc.text("Description", 10, y); doc.text("Qty", 120, y); doc.text("Rate", 145, y); doc.text("Amount", 175, y);
+    y += 5; doc.line(10, y, 200, y); y += 7; doc.setFont(undefined, 'normal');
+    o.items.forEach(i=>{ doc.text(i.name.substring(0,35), 10, y); doc.text(i.qty.toString(), 120, y); doc.text(`R${i.price}`, 145, y); doc.text(`R${i.price*i.qty}`, 175, y); y += 7; });
+    y += 5; doc.line(120, y, 200, y); y += 7; doc.text("Subtotal:", 145, y); doc.text(`R${subtotal.toFixed(2)}`, 175, y); y += 7;
+    if(addTax){ doc.text("VAT 15%:", 145, y); doc.text(`R${tax.toFixed(2)}`, 175, y); y += 7; }
+    doc.setFont(undefined, 'bold'); doc.setFontSize(12); doc.text("TOTAL:", 145, y); doc.text(`R${grandTotal.toFixed(2)}`, 175, y);
+    if(isPaid){ doc.setFontSize(30); doc.setTextColor(0, 184, 148); doc.text("PAID", 80, 150, {angle: -30}); doc.setTextColor(0,0,0); }
+    doc.setFontSize(8); doc.text("Thank you for shopping with SHRN DEE PTY LTD", 105, 280, {align: "center"});
+    doc.save(`SHRNDEE-Invoice-${currentInvoiceId.slice(-6)}.pdf`); document.getElementById('invoiceModal').style.display='none';
+  }
+
+  window.downloadQuickInvoice = () => {
+    let name = document.getElementById('quickInvName').value;
+    let phone = document.getElementById('quickInvPhone').value;
+    let email = document.getElementById('quickInvEmail').value;
+    let item = document.getElementById('quickInvItem').value;
+    let qty = Number(document.getElementById('quickInvQty').value) || 1;
+    let price = Number(document.getElementById('quickInvPrice').value) || 0;
+    let addTax = document.getElementById('quickInvTax').checked;
+    let isPaid = document.getElementById('quickInvPaid').checked;
+
+    if(!name ||!item ||!price) return alert('Please fill Name, Item and Price');
+
+    let subtotal = qty * price;
+    let tax = addTax? subtotal * 0.15 : 0;
+    let grandTotal = subtotal + tax;
+    let invId = Date.now().toString().slice(-6);
+    let orderId = Date.now().toString();
+
+    const order = {
+      user: 'Walk-In',
+      customerName: name,
+      customerPhone: phone,
+      customerEmail: email,
+      items: [{name: item, qty: qty, price: price}],
+      total: grandTotal,
+      date: new Date().toISOString(),
+      status: isPaid? 'Completed' : 'Pending'
+    };
+    set(ref(db, 'shrn_dee_biz/requests/' + orderId), order);
+
+    const doc = new jsPDF();
+    doc.addImage('https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg', 'JPEG', 10, 10, 25, 25);
+    doc.setFontSize(16); doc.setFont(undefined, 'bold'); doc.text("SHRN DEE PTY LTD", 40, 18);
+    doc.setFontSize(9); doc.text("ceo@shrndee.co.za | Beauty Ambassador", 40, 24); doc.line(10, 40, 200, 40);
+    doc.setFontSize(18); doc.setFont(undefined, 'bold'); doc.text("INVOICE", 150, 50);
+    doc.setFontSize(10); doc.text(`Invoice #: ${invId}`, 150, 57); doc.text(`Date: ${new Date().toLocaleDateString()}`, 150, 62);
+    doc.setFontSize(12); doc.text("BILL TO:", 10, 50); doc.setFontSize(10);
+    doc.text(name, 10, 57); if(phone) doc.text(phone, 10, 62); if(email) doc.text(email, 10, 67);
+    let y = 90; doc.setFont(undefined, 'bold'); doc.text("Description", 10, y); doc.text("Qty", 120, y); doc.text("Rate", 145, y); doc.text("Amount", 175, y);
+    y += 5; doc.line(10, y, 200, y); y += 7; doc.setFont(undefined, 'normal');
+    doc.text(item.substring(0,35), 10, y); doc.text(qty.toString(), 120, y); doc.text(`R${price}`, 145, y); doc.text(`R${subtotal}`, 175, y); y+=7;
+    y += 5; doc.line(120, y, 200, y); y += 7; doc.text("Subtotal:", 145, y); doc.text(`R${subtotal.toFixed(2)}`, 175, y); y += 7;
+    if(addTax){ doc.text("VAT 15%:", 145, y); doc.text(`R${tax.toFixed(2)}`, 175, y); y += 7; }
+    doc.setFont(undefined, 'bold'); doc.setFontSize(12); doc.text("TOTAL:", 145, y); doc.text(`R${grandTotal.toFixed(2)}`, 175, y);
+    if(isPaid){ doc.setFontSize(30); doc.setTextColor(0, 184, 148); doc.text("PAID", 80, 150, {angle: -30}); doc.setTextColor(0,0,0); }
+    doc.setFontSize(8); doc.text("Thank you for shopping with SHRN DEE PTY LTD", 105, 280, {align: "center"});
+    doc.save(`SHRNDEE-QuickInvoice-${invId}.pdf`);
+
+    document.getElementById('quickInvoiceModal').style.display='none';
+    alert('✅ Walk-In Invoice saved!')
+  }
+
+  window.editProduct = (id) => { if(currentUser.role == 'reception') return alert('No permission'); let p = products[id]; editingId = id; pName.value = p.name; pCat.value = p.category; pImg.value = p.img; pPrice.value = p.price; pOldPrice.value = p.oldPrice; pStock.value = p.stock; pDesc.value = p.desc; formTitle.innerText = "✏️ Editing: " + p.name; saveBtn.innerText = "Update Product"; saveBtn.style.background = "var(--blue)"; cancelBtn.style.display = "block"; document.getElementById('tab-products').scrollIntoView(); }
+  window.cancelEdit = () => { editingId = null; [pName,pImg,pPrice,pOldPrice,pStock,pDesc].forEach(i=>i.value=''); formTitle.innerText = "➕ Add Product"; saveBtn.innerText = "Save Product"; saveBtn.style.background = "var(--accent)"; cancelBtn.style.display = "none"; }
+  window.saveProduct = () => { if(currentUser.role == 'reception') return alert('No permission'); let productData = { name: pName.value.trim(), category: pCat.value, img: pImg.value.trim() || 'https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg', price: Number(pPrice.value) || 0, oldPrice: Number(pOldPrice.value) || 0, stock: Number(pStock.value) || 0, desc: pDesc.value.trim() }; if(!productData.name){ return alert('Please enter product name') } if(editingId){ set(ref(db, 'shrn_dee_biz/categories/' + editingId), productData).then(()=>{ alert('Product Updated!'); cancelEdit(); }).catch(err=> alert('Error: ' + err.message)); } else { let id = Date.now().toString(); set(ref(db, 'shrn_dee_biz/categories/' + id), productData).then(()=>{ [pName,pImg,pPrice,pOldPrice,pStock,pDesc].forEach(i=>i.value=''); alert('Product Added!'); }).catch(err=> alert('Error: ' + err.message)); } }
+
+  function buildStockList(){ stockList.innerHTML = ''; Object.entries(products).forEach(([id,p])=>{ stockList.innerHTML += `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;border:1px solid var(--border);border-radius:8px;margin:5px 0"><div><b>${p.name}</b><br><small class="${p.stock<10?'stock-low':''}">Stock: ${p.stock}</small></div><div><input type="number" id="stock_${id}" value="0" style="width:80px"><button class="btn-green" onclick="updateStock('${id}')">+ Add</button></div></div>`; }) }
+
+  window.seedDatabase = () => {
+    if(currentUser.role!= 'ceo' && currentUser.role!= 'manager') return alert('No permission');
+    const defaultData = [
+      {name:"Avon Fragrance Perfume", category:"Avon", price:180, stock:50, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Long lasting scent"},
+      {name:"Avroy Shlein Face Cream", category:"Avroy Shlein", price:250, stock:30, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Anti-aging, removes wrinkles"},
+      {name:"Inuka Perfume", category:"Inuka", price:200, stock:40, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Luxury fragrance"},
+      {name:"Necklace Set", category:"Jewellery", price:150, stock:20, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Fashion jewellery"},
+      {name:"Hand & Body Lotion", category:"Cosmetics", price:120, stock:60, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Smooth skin"},
+      {name:"Join Avon Team", category:"Recruitment", price:0, stock:999, img:"https://i.ibb.co/QjtSn1DR/IMG-20260728-WA0352.jpg", desc:"Become an Avon Ambassador"}
+    ];
+    defaultData.forEach(p=>{ let id = Date.now().toString() + Math.random(); set(ref(db, 'shrn_dee_biz/categories/' + id), p); });
+    alert('6 Default SHRN DEE products added to Firebase!')
+  }
+
+  window.deleteProduct = (id) => { if(currentUser.role!= 'ceo') return alert('CEO only'); if(confirm('Delete this product?')) remove(ref(db, 'shrn_dee_biz/categories/' + id)) }
+  window.updateStock = (id) => { let add = parseInt(document.getElementById('stock_'+id).value); set(ref(db, 'shrn_dee_biz/categories/' + id + '/stock'), (products[id].stock||0) + add); document.getElementById('stock_'+id).value = 0; }
+
+  window.addToCart = (id) => { let p = products[id]; let item = cart.find(x=>x.id==id); if(item){ item.qty++ } else { cart.push({id,name:p.name,price:p.price,qty:1,category:p.category}) } updateCart(); renderProducts(); renderClientProducts(); }
+  window.decreaseQty = (id) => {
+    let item = cart.find(x=>x.id==id);
+    if(item){
+      item.qty--;
+      if(item.qty <= 0){
+        cart = cart.filter(x=>x.id!=id);
+      }
+    }
+    updateCart();
+    renderProducts();
+    renderClientProducts();
+  }
+
+  function updateCart(){
+    cartBar.style.display = cart.length?'block':'none'; clientCartBar.style.display = cart.length?'block':'none';
+    let count = cart.reduce((a,b)=>a+b.qty,0); let total = cart.reduce((a,b)=>a+b.qty*b.price,0);
+    if(cartCount) cartCount.innerText = count; if(clientCartCount) clientCartCount.innerText = count;
+    if(cartTotal) cartTotal.innerText = total; if(clientCartTotal) clientCartTotal.innerText = total;
+  }
+
+  window.sendQuote = () => {
+    let name = document.getElementById('custName').value;
+    let phone = document.getElementById('custPhone').value;
+    let email = document.getElementById('custEmail').value;
+    if(!name ||!phone) return alert('Please enter Name and Phone');
+    let total = cart.reduce((a,b)=>a+b.qty*b.price,0);
+    let orderId = Date.now().toString();
+    const order = {
+      user: 'Client',
+      customerName: name,
+      customerPhone: phone,
+      customerEmail: email,
+      items: cart,
+      total: total,
+      date: new Date().toISOString(),
+      status: 'Pending'
+    };
+    set(ref(db, 'shrn_dee_biz/requests/' + orderId), order);
+    cart = []; updateCart(); document.getElementById('customerModal').style.display='none';
+    alert('✅ Order sent! We will contact you soon.');
+  }
+
+  window.openCustomerModal = () => { if(cart.length === 0) return alert('Cart empty'); document.getElementById('customerModal').style.display = 'flex'; }
+
+  window.downloadReport = () => {
+    const doc = new jsPDF(); doc.text("SHRN DEE PTY LTD Report", 10, 10);
+    doc.text(`Total Products: ${Object.keys(products).length}`, 10, 20);
+    doc.text(`Total Stock: ${Object.values(products).reduce((a,b)=>a+(b.stock||0),0)}`, 10, 30);
+    doc.text(`Pending Orders: ${Object.values(orders).filter(o=>o.status=='Pending').length}`, 10, 40);
+    doc.text(`Generated: ${new Date().toLocaleString()}`, 10, 50); doc.save("SHRNDEE-Report.pdf");
+  }
+
+  window.downloadCSV = () => {
+    if(Object.keys(orders).length === 0) return alert('No orders to export');
+    let csv = 'Order ID,Date,Customer Name,Phone,Email,Items,Total R,Status\n';
+    Object.entries(orders).forEach(([id,o])=>{
+      let items = o.items.map(i=>`${i.name} x${i.qty}`).join('; '); let date = new Date(o.date).toLocaleDateString();
+      csv += `"${id.slice(-6)}","${date}","${o.customerName||'Guest'}","${o.customerPhone||''}","${o.customerEmail||''}","${items}",${o.total},"${o.status}"\n`;
+    });
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob); link.download = `SHRNDEE-Orders-${new Date().toISOString().split('T')[0]}.csv`; link.click();
+  }
+
+  function setClientLink(){ let link = window.location.origin + window.location.pathname + '?client=1'; if(document.getElementById('clientShareLink')) document.getElementById('clientShareLink').value = link; }
+  window.copyClientLink = () => { let link = document.getElementById('clientShareLink'); link.select(); document.execCommand('copy'); alert('Client link copied! 📋'); }
+  window.shareClientWhatsApp = () => { let link = document.getElementById('clientShareLink').value; let msg = `🛍️ SHRN DEE PTY LTD 🛍️\n\nShop Beauty Products:\n${link}\n\nAvon | Avroy Shlein | Inuka\nBeauty Advisor`; window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`); }
+  window.toggleDark = () => { document.body.classList.toggle('dark-mode'); localStorage.setItem('darkMode', document.body.classList.contains('dark-mode')); }
+  if(localStorage.getItem('darkMode')==='true') document.body.classList.add('dark-mode');
+});
+</script>
+</body>
+</html>
