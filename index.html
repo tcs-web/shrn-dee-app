@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
-:root{--bg:#f5f5f5;--card:#fff;--accent:#C2185B;--accent2:#890889;--green:#00b894;--blue:#890889;--purple:#C2185B;--text:#2d3436;--muted:#636e72;--border:#dfe6e9;--shadow:0 2px 8px rgba(0,0,0,0.1);--danger:#d63031}
+:root{--bg:#f5f5f5;--card:#fff;--accent:#C2185B;--accent2:#890889;--green:#00b894;--blue:#890889;--purple:#890889;--text:#2d3436;--muted:#636e72;--border:#dfe6e9;--shadow:0 2px 8px rgba(0,0,0,0.1);--danger:#d63031}
 *{box-sizing:border-box;font-family:'Poppins',sans-serif}body{margin:0;background:var(--bg);color:var(--text)}
 html, body{overflow-x:hidden; width:100%}
 .header{background:linear-gradient(90deg,#890889,#C2185B);padding:12px;color:#fff;position:sticky;top:0;z-index:99;box-shadow:var(--shadow)}
@@ -37,10 +37,10 @@ html, body{overflow-x:hidden; width:100%}
 .old-price{text-decoration:line-through;color:var(--muted);font-size:11px}
 .stock{font-size:10px;color:var(--green)}
 .stock-low{color:var(--danger);font-weight:700}
-.btn-cart{background:var(--accent);color:#fff;border:none;width:100%;padding:8px;border-radius:8px;font-weight:700;cursor:pointer}
+.btn-cart{background:var(--purple);color:#fff;border:none;width:100%;padding:8px;border-radius:8px;font-weight:700;cursor:pointer}
 .btn-oos{background:#ccc;color:#fff;border:none;width:100%;padding:8px;border-radius:8px;font-weight:700;cursor:not-allowed}
 .qty-controls{display:flex;gap:5px;align-items:center;margin-top:8px}
-.qty-btn{background:var(--accent);color:#fff;border:none;width:32px;height:32px;border-radius:8px;font-weight:800;cursor:pointer;font-size:16px}
+.qty-btn{background:var(--purple);color:#fff;border:none;width:32px;height:32px;border-radius:8px;font-weight:800;cursor:pointer;font-size:16px}
 .qty-text{background:#f5f5f5;border:1px solid var(--border);padding:6px 10px;border-radius:8px;font-weight:700;min-width:40px;text-align:center}
 .admin{background:#fff;padding:15px;border-radius:12px;margin:15px 0;box-shadow:var(--shadow);overflow-x:hidden}
 .login-box{max-width:400px;margin:40px auto;background:#fff;padding:25px;border-radius:15px;box-shadow:var(--shadow)}
@@ -76,6 +76,7 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
 .dark-mode{--bg:#1a1a1a;--card:#2d3436;--text:#fff;--border:#444}
 .modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:999}
 .modal-content{background:var(--card);padding:20px;border-radius:15px;width:90%;max-width:400px}
+.recruit-form{background:#f3e8ff;padding:15px;border-radius:12px;margin:15px 0;border-left:4px solid var(--purple)}
 @media(max-width:600px){
 .grid{grid-template-columns:1fr!important}
 .stats{grid-template-columns:repeat(2,1fr)}
@@ -93,6 +94,9 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
   <button onclick="document.getElementById('installBanner').style.display='none'" style="background:none;border:none;color:#fff;font-size:18px;float:right">x</button>
 </div>
 
+<div id="ambassadorModal" class="modal"> <div class="modal-content"> <h3>💜 Join SHRN DEE as Ambassador</h3> <input type="text" id="ambName" placeholder="Full Name"> <input type="tel" id="ambPhone" placeholder="Phone Number"> <input type="email" id="ambEmail" placeholder="Email Address"> <select id="ambBrand"><option value="">Which brand interests you?</option><option>Avon</option><option>Avroy Shlein</option><option>Inuka</option><option>All 3 Brands</option></select> <textarea id="ambMessage" placeholder="Why do you want to join?"></textarea> <button class="btn-purple" onclick="submitAmbassador()" style="width:100%">Submit Application</button> <button class="btn-gray" onclick="document.getElementById('ambassadorModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
+
+<!-- Rest of your modals stay the same -->
 <div id="quickInvoiceModal" class="modal"> <div class="modal-content"> <h3>🧾 Quick Invoice - Walk In</h3> <input type="text" id="quickInvName" placeholder="Customer Name"> <input type="tel" id="quickInvPhone" placeholder="Customer Phone"> <input type="email" id="quickInvEmail" placeholder="Customer Email"> <input type="text" id="quickInvItem" placeholder="Product Name"> <input type="number" id="quickInvQty" placeholder="Qty" value="1"> <input type="number" id="quickInvPrice" placeholder="Price R"> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="quickInvTax"> Add 15% VAT</label> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="quickInvPaid" checked> Mark as PAID</label> <button class="btn" onclick="downloadQuickInvoice()" style="width:100%">Download Invoice PDF</button> <button class="btn-gray" onclick="document.getElementById('quickInvoiceModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
 <div id="invoiceModal" class="modal"> <div class="modal-content"> <h3>📄 Edit Invoice Details</h3> <input type="text" id="invCustName" placeholder="Customer Name"> <input type="tel" id="invCustPhone" placeholder="Customer Phone"> <input type="email" id="invCustEmail" placeholder="Customer Email"> <input type="text" id="invCustAddress" placeholder="Customer Address"> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="invTaxToggle"> Add 15% VAT</label> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="invPaidToggle"> Mark as PAID</label> <button class="btn" onclick="downloadFinalInvoice()" style="width:100%">Download Invoice PDF</button> <button class="btn-gray" onclick="document.getElementById('invoiceModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
 <div id="customerModal" class="modal"> <div class="modal-content"> <h3>Customer Details</h3> <input type="text" id="custName" placeholder="Your Name"> <input type="tel" id="custPhone" placeholder="Your Phone Number"> <input type="email" id="custEmail" placeholder="Your Email Address"> <div class="bank-info"><b>🏦 Payment:</b><br>Standard Bank: 10 27 189 643 2<br>Send proof to WhatsApp after order</div> <button class="btn" onclick="sendQuote()" style="width:100%">Order via WhatsApp</button> <button class="btn-gray" onclick="document.getElementById('customerModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
@@ -131,6 +135,7 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
   </footer>
 </div>
 
+<!-- Login + App sections remain the same -->
 <div id="loginScreen">
   <div class="login-box">
     <img src="https://i.ibb.co/pYT0Byn/IMG-20260821-WA0079.jpg" style="width:90px;margin:0 auto;display:block;border-radius:15px">
@@ -261,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const auth = getAuth(app);
   const productsRef = ref(db, 'shrn_dee_biz/categories');
   const ordersRef = ref(db, 'shrn_dee_biz/requests');
+  const ambassadorsRef = ref(db, 'shrn_dee_biz/ambassadors');
   let products = {}; let orders = {}; let cart = [];
   let currentUser = {role:'reception'}; let currentFilter = 'All'; let editingId = null; let deferredPrompt; let currentInvoiceId = null;
 
@@ -377,12 +383,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!isClientMode) return;
     clientProductGrid.innerHTML = '';
     if(Object.keys(products).length === 0){ clientProductGrid.innerHTML = `<p style="text-align:center;grid-column:1/-1">Loading products...</p>`; return; }
-    Object.entries(products).filter(([id,p])=>{ let matchCat = currentFilter == 'All' || p.category == currentFilter; let matchSearch = p.name.toLowerCase().includes(clientSearchInput.value.toLowerCase()); return matchCat && matchSearch; }).forEach(([id,p])=>{
+
+    let recruitmentCard = `
+    <div class="card" style="grid-column:1/-1;background:linear-gradient(135deg,#f3e8ff,#fff)">
+      <h4>💜 Become a SHRN DEE Ambassador</h4>
+      <p style="font-size:12px;color:var(--muted)">Join Avon, Avroy Shlein & Inuka. Run your own beauty business. Earn commission, get training & support.</p>
+      <button class="btn-purple" onclick="document.getElementById('ambassadorModal').style.display='flex'">Apply Now</button>
+    </div>`;
+
+    let filtered = Object.entries(products).filter(([id,p])=>{
+      let matchCat = currentFilter == 'All' || p.category == currentFilter;
+      let matchSearch = p.name.toLowerCase().includes(clientSearchInput.value.toLowerCase());
+      return matchCat && matchSearch;
+    });
+
+    clientProductGrid.innerHTML = '';
+    if(currentFilter == 'Recruitment' || currentFilter == 'All') clientProductGrid.innerHTML += recruitmentCard;
+
+    filtered.forEach(([id,p])=>{
+      if(p.category == 'Recruitment' && currentFilter!= 'Recruitment' && currentFilter!= 'All') return;
       let imgs = getImages(p); let mainImg = imgs[0];
       let extraImgs = imgs.map((u,i)=>`<img src="${u}" class="${i==0?'active':''}" onclick="switchImage('${id}','${u}',this)" onerror="this.style.display='none'">`).join('');
       let brands = p.desc? p.desc.split(',').map(b=>`<span class="brand-tag">${b}</span>`).join('') : '';
-      let cartBtn = p.stock > 0? getCartControls(id) : `<button class="btn-oos" disabled>Out of Stock</button>`;
-      clientProductGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/pYT0Byn/IMG-20260821-WA0079.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">R${p.price} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div>${cartBtn}</div>`;
+      let cartBtn = p.stock > 0 && p.price > 0? getCartControls(id) : (p.price == 0? `<button class="btn-purple" onclick="document.getElementById('ambassadorModal').style.display='flex'">Apply Now</button>` : `<button class="btn-oos" disabled>Out of Stock</button>`);
+      clientProductGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/pYT0Byn/IMG-20260821-WA0079.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">${p.price > 0? 'R'+p.price : 'FREE'} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div>${cartBtn}</div>`;
     })
   }
 
@@ -394,8 +418,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let imgs = getImages(p); let mainImg = imgs[0];
       let extraImgs = imgs.map((u,i)=>`<img src="${u}" class="${i==0?'active':''}" onclick="switchImage('${id}','${u}',this)" onerror="this.style.display='none'">`).join('');
       let brands = p.desc? p.desc.split(',').map(b=>`<span class="brand-tag">${b}</span>`).join('') : '';
-      let cartBtn = p.stock > 0? getCartControls(id) : `<button class="btn-oos" disabled>Out of Stock</button>`;
-      productGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/pYT0Byn/IMG-20260821-WA0079.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">R${p.price} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div>${cartBtn}</div>`;
+      let cartBtn = p.stock > 0 && p.price > 0? getCartControls(id) : (p.price == 0? `<button class="btn-purple" onclick="document.getElementById('ambassadorModal').style.display='flex'">View Details</button>` : `<button class="btn-oos" disabled>Out of Stock</button>`);
+      productGrid.innerHTML += `<div class="card" id="card_${id}"><img id="main_${id}" src="${mainImg}" loading="lazy" onerror="this.onerror=null;this.src='https://i.ibb.co/pYT0Byn/IMG-20260821-WA0079.jpg'"><div class="card-imgs">${extraImgs}</div><h4>${p.name}</h4>${brands}<div class="price">${p.price > 0? 'R'+p.price : 'FREE'} ${p.oldPrice? `<span class="old-price">R${p.oldPrice}</span>`:''}</div>${cartBtn}</div>`;
     })
   }
 
@@ -442,6 +466,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.updateOrderStatus = (id, status) => { set(ref(db, 'shrn_dee_biz/requests/' + id + '/status'), status); }
   window.deleteOrder = (id) => { if(currentUser.role!= 'ceo' && currentUser.role!= 'manager') return alert('No permission'); if(confirm('Delete this order?')) remove(ref(db, 'shrn_dee_biz/requests/' + id)) }
+
+  window.submitAmbassador = () => {
+    let name = document.getElementById('ambName').value.trim();
+    let phone = document.getElementById('ambPhone').value.trim();
+    let email = document.getElementById('ambEmail').value.trim();
+    let brand = document.getElementById('ambBrand').value;
+    let message = document.getElementById('ambMessage').value.trim();
+    if(!name ||!phone) return alert('Please enter Name and Phone');
+
+    const ambId = Date.now().toString();
+    const ambData = {name, phone, email, brand, message, date: new Date().toISOString(), status: 'New'};
+    set(ref(db, 'shrn_dee_biz/ambassadors/' + ambId), ambData);
+
+    let msg = `💜 NEW AMBASSADOR APPLICATION\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nBrand: ${brand}\nMessage: ${message}`;
+    window.open(`https://wa.me/${BUSINESS_WHATSAPP}?text=${encodeURIComponent(msg)}`);
+
+    document.getElementById('ambassadorModal').style.display='none';
+    [ambName,ambPhone,ambEmail,ambBrand,ambMessage].forEach(i=>i.value='');
+    alert('✅ Application submitted! We will contact you via WhatsApp.')
+  }
 
   window.openInvoiceModal = (id) => {
     currentInvoiceId = id; let o = orders[id];
