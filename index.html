@@ -96,7 +96,6 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
 
 <div id="ambassadorModal" class="modal"> <div class="modal-content"> <h3>💜 Join SHRN DEE as Ambassador</h3> <input type="text" id="ambName" placeholder="Full Name"> <input type="tel" id="ambPhone" placeholder="Phone Number"> <input type="email" id="ambEmail" placeholder="Email Address"> <select id="ambBrand"><option value="">Which brand interests you?</option><option>Avon</option><option>Avroy Shlein</option><option>Inuka</option><option>All 3 Brands</option></select> <textarea id="ambMessage" placeholder="Why do you want to join?"></textarea> <button class="btn-purple" onclick="submitAmbassador()" style="width:100%">Submit Application</button> <button class="btn-gray" onclick="document.getElementById('ambassadorModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
 
-<!-- Rest of your modals stay the same -->
 <div id="quickInvoiceModal" class="modal"> <div class="modal-content"> <h3>🧾 Quick Invoice - Walk In</h3> <input type="text" id="quickInvName" placeholder="Customer Name"> <input type="tel" id="quickInvPhone" placeholder="Customer Phone"> <input type="email" id="quickInvEmail" placeholder="Customer Email"> <input type="text" id="quickInvItem" placeholder="Product Name"> <input type="number" id="quickInvQty" placeholder="Qty" value="1"> <input type="number" id="quickInvPrice" placeholder="Price R"> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="quickInvTax"> Add 15% VAT</label> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="quickInvPaid" checked> Mark as PAID</label> <button class="btn" onclick="downloadQuickInvoice()" style="width:100%">Download Invoice PDF</button> <button class="btn-gray" onclick="document.getElementById('quickInvoiceModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
 <div id="invoiceModal" class="modal"> <div class="modal-content"> <h3>📄 Edit Invoice Details</h3> <input type="text" id="invCustName" placeholder="Customer Name"> <input type="tel" id="invCustPhone" placeholder="Customer Phone"> <input type="email" id="invCustEmail" placeholder="Customer Email"> <input type="text" id="invCustAddress" placeholder="Customer Address"> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="invTaxToggle"> Add 15% VAT</label> <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="invPaidToggle"> Mark as PAID</label> <button class="btn" onclick="downloadFinalInvoice()" style="width:100%">Download Invoice PDF</button> <button class="btn-gray" onclick="document.getElementById('invoiceModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
 <div id="customerModal" class="modal"> <div class="modal-content"> <h3>Customer Details</h3> <input type="text" id="custName" placeholder="Your Name"> <input type="tel" id="custPhone" placeholder="Your Phone Number"> <input type="email" id="custEmail" placeholder="Your Email Address"> <div class="bank-info"><b>🏦 Payment:</b><br>Standard Bank: 10 27 189 643 2<br>Send proof to WhatsApp after order</div> <button class="btn" onclick="sendQuote()" style="width:100%">Order via WhatsApp</button> <button class="btn-gray" onclick="document.getElementById('customerModal').style.display='none'" style="width:100%;margin-top:8px">Cancel</button> </div> </div>
@@ -135,7 +134,6 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
   </footer>
 </div>
 
-<!-- Login + App sections remain the same -->
 <div id="loginScreen">
   <div class="login-box">
     <img src="https://i.ibb.co/pYT0Byn/IMG-20260821-WA0079.jpg" style="width:90px;margin:0 auto;display:block;border-radius:15px">
@@ -174,6 +172,8 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
         <div class="tab" onclick="showTab('products', this)">Products</div>
         <div class="tab" onclick="showTab('stock', this)">Stock</div>
         <div class="tab" onclick="showTab('orders', this)">Orders</div>
+        <div class="tab" onclick="showTab('applications', this)">💜 Applications</div>
+        <div class="tab" onclick="showTab('notes', this)">📝 Notes</div>
         <div class="tab" id="usersTab" onclick="showTab('users', this)">Users</div>
         <div class="tab" onclick="showTab('reports', this)">Reports</div>
       </div>
@@ -218,6 +218,20 @@ input,select,textarea{width:100%;padding:10px;margin:6px 0;border:1px solid var(
       </div>
       <div id="tab-stock" style="display:none"><h3>📦 Stock Management</h3><div id="stockList"></div></div>
       <div id="tab-orders" style="display:none"><h3>📦 Customer Orders</h3><div id="ordersList">Loading orders...</div></div>
+      <div id="tab-applications" style="display:none"><h3>💜 Ambassador Applications</h3><div id="applicationsList">Loading applications...</div></div>
+      <div id="tab-notes" style="display:none">
+        <h3>📝 Admin Notes - Don't Forget</h3>
+        <div class="recruit-form">
+          <input type="text" id="noteTitle" placeholder="Note Title - e.g. Customer owes R200">
+          <textarea id="noteText" rows="3" placeholder="Details: Name, Amount, What to remember..."></textarea>
+          <label style="display:flex;align-items:center;gap:8px;margin:10px 0"><input type="checkbox" id="notePin"> 📌 Pin this note</label>
+          <button class="btn-purple" onclick="saveNote()" style="width:100%">Save Note</button>
+        </div>
+        <h4 style="margin-top:15px">📌 Pinned Notes</h4>
+        <div id="pinnedNotesList"></div>
+        <h4 style="margin-top:15px">📋 All Notes</h4>
+        <div id="notesList"></div>
+      </div>
       <div id="tab-users" style="display:none"><h3>👥 Users & Roles</h3><p><b>CEO:</b> ceo@shrndee.co.za</p><p><b>Manager:</b> manager@shrndee.co.za</p><p><b>Reception:</b> reception@shrndee.co.za</p></div>
       <div id="tab-reports" style="display:none"><h3>📊 Reports</h3><button class="btn-purple" onclick="downloadReport()">Download PDF Report</button> <button class="btn-green" onclick="downloadCSV()">Download CSV Spreadsheet</button></div>
     </div>
@@ -267,7 +281,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsRef = ref(db, 'shrn_dee_biz/categories');
   const ordersRef = ref(db, 'shrn_dee_biz/requests');
   const ambassadorsRef = ref(db, 'shrn_dee_biz/ambassadors');
-  let products = {}; let orders = {}; let cart = [];
+  const notesRef = ref(db, 'shrn_dee_biz/notes');
+  let products = {}; let orders = {}; let applications = {}; let notes = {}; let cart = [];
   let currentUser = {role:'reception'}; let currentFilter = 'All'; let editingId = null; let deferredPrompt; let currentInvoiceId = null;
 
   window.addEventListener('beforeinstallprompt', (e) => {
@@ -356,13 +371,15 @@ document.addEventListener('DOMContentLoaded', () => {
   window.showTab = (tab, el) => {
     document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
     el.classList.add('active');
-    ['dashboard','products','stock','orders','users','reports'].forEach(t=>{
+    ['dashboard','products','stock','orders','applications','notes','users','reports'].forEach(t=>{
       document.getElementById('tab-'+t).style.display = t==tab?'block':'none'
     })
   }
 
   onValue(productsRef, snap => { products = snap.val() || {}; renderProducts(); renderClientProducts(); buildProductList(); buildStockList(); updateDashboard(); })
   onValue(ordersRef, snap => { orders = snap.val() || {}; buildOrders(); updateDashboard(); })
+  onValue(ambassadorsRef, snap => { applications = snap.val() || {}; buildApplications(); })
+  onValue(notesRef, snap => { notes = snap.val() || {}; buildNotes(); })
 
   function updateDashboard(){
     document.getElementById('statProducts').innerText = Object.keys(products).length;
@@ -463,6 +480,76 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`;
     })
   }
+
+  // APPLICATIONS TAB
+  function buildApplications(){
+    if(currentUser.role == 'reception') return;
+    let appList = document.getElementById('applicationsList');
+    if(!appList) return;
+    appList.innerHTML = '';
+    if(Object.keys(applications).length === 0){ appList.innerHTML = '<p>No applications yet</p>'; return; }
+    Object.entries(applications).reverse().forEach(([id,a])=>{
+      let statusColor = a.status=='New'? 'var(--accent)' : 'var(--green)';
+      appList.innerHTML += `
+      <div class="order-card">
+        <b>${a.name}</b> - <span style="color:${statusColor};font-weight:700">${a.status}</span><br>
+        <small>${new Date(a.date).toLocaleString()}</small><br>
+        <small><b>Phone:</b> ${a.phone} | <b>Email:</b> ${a.email}</small><br>
+        <small><b>Brand:</b> ${a.brand}</small><br>
+        <small><b>Message:</b> ${a.message}</small><br>
+        <div style="display:flex;gap:5px;margin-top:8px">
+          <button class="btn-green" onclick="updateAppStatus('${id}','Contacted')">Mark Contacted</button>
+          <button class="btn-gray" onclick="updateAppStatus('${id}','Rejected')">Reject</button>
+          <button class="btn-purple" onclick="window.open('https://wa.me/27${a.phone.replace(/^0/,'')}')">WhatsApp</button>
+        </div>
+      </div>`;
+    })
+  }
+  window.updateAppStatus = (id, status) => { set(ref(db, 'shrn_dee_biz/ambassadors/' + id + '/status'), status); }
+
+  // NOTES TAB
+  function saveNote(){
+    let title = document.getElementById('noteTitle').value.trim();
+    let text = document.getElementById('noteText').value.trim();
+    let pinned = document.getElementById('notePin').checked;
+    if(!title) return alert('Please enter note title');
+    const noteId = Date.now().toString();
+    set(ref(db, 'shrn_dee_biz/notes/' + noteId), {
+      title, text, pinned, date: new Date().toISOString()
+    });
+    [noteTitle,noteText].forEach(i=>i.value=''); document.getElementById('notePin').checked=false;
+    alert('✅ Note saved!');
+  }
+
+  function buildNotes(){
+    let pinnedDiv = document.getElementById('pinnedNotesList');
+    let allDiv = document.getElementById('notesList');
+    if(!pinnedDiv) return;
+    pinnedDiv.innerHTML = ''; allDiv.innerHTML = '';
+    let pinned = Object.entries(notes).filter(([id,n])=>n.pinned);
+    let others = Object.entries(notes).filter(([id,n])=>!n.pinned);
+
+    if(pinned.length === 0) pinnedDiv.innerHTML = '<p style="color:var(--muted)">No pinned notes</p>';
+    pinned.forEach(([id,n])=>{
+      pinnedDiv.innerHTML += noteCard(id,n,true);
+    });
+
+    if(others.length === 0) allDiv.innerHTML = '<p style="color:var(--muted)">No notes yet</p>';
+    others.reverse().forEach(([id,n])=>{
+      allDiv.innerHTML += noteCard(id,n,false);
+    });
+  }
+
+  function noteCard(id,n,isPinned){
+    return `
+    <div class="order-card" style="border-left:4px solid ${isPinned?'var(--purple)':'var(--border)'}">
+      <b>${isPinned?'📌 ':''}${n.title}</b><br>
+      <small>${new Date(n.date).toLocaleString()}</small><br>
+      <p style="margin:5px 0;white-space:pre-wrap">${n.text}</p>
+      <button class="btn-gray" style="padding:5px 10px;font-size:12px" onclick="deleteNote('${id}')">Delete</button>
+    </div>`;
+  }
+  window.deleteNote = (id) => { if(confirm('Delete this note?')) remove(ref(db, 'shrn_dee_biz/notes/' + id)) }
 
   window.updateOrderStatus = (id, status) => { set(ref(db, 'shrn_dee_biz/requests/' + id + '/status'), status); }
   window.deleteOrder = (id) => { if(currentUser.role!= 'ceo' && currentUser.role!= 'manager') return alert('No permission'); if(confirm('Delete this order?')) remove(ref(db, 'shrn_dee_biz/requests/' + id)) }
