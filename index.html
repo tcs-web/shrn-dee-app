@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.updateAppStatus = (id, status) => { set(ref(db, 'shrn_dee_biz/ambassadors/' + id + '/status'), status); }
 
-  // NOTES TAB
+// NOTES TAB - FIXED
   function saveNote(){
     let title = document.getElementById('noteTitle').value.trim();
     let text = document.getElementById('noteText').value.trim();
@@ -516,9 +516,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const noteId = Date.now().toString();
     set(ref(db, 'shrn_dee_biz/notes/' + noteId), {
       title, text, pinned, date: new Date().toISOString()
+    }).then(()=>{
+      document.getElementById('noteTitle').value='';
+      document.getElementById('noteText').value='';
+      document.getElementById('notePin').checked=false;
+      alert('✅ Note saved!');
+    }).catch((err)=>{
+      alert('Error saving note: ' + err.message);
+      console.log(err);
     });
-    [noteTitle,noteText].forEach(i=>i.value=''); document.getElementById('notePin').checked=false;
-    alert('✅ Note saved!');
   }
 
   function buildNotes(){
