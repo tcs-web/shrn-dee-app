@@ -507,26 +507,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.updateAppStatus = (id, status) => { set(ref(db, 'shrn_dee_biz/ambassadors/' + id + '/status'), status); }
 
-// NOTES TAB - FIXED
-  function saveNote(){
+// NOTES TAB - FINAL FIX WITH DEBUG
+  window.saveNote = function(){
+    console.log("Save button clicked"); // for debugging
     let title = document.getElementById('noteTitle').value.trim();
     let text = document.getElementById('noteText').value.trim();
     let pinned = document.getElementById('notePin').checked;
     if(!title) return alert('Please enter note title');
+    
     const noteId = Date.now().toString();
-    set(ref(db, 'shrn_dee_biz/notes/' + noteId), {
-      title, text, pinned, date: new Date().toISOString()
-    }).then(()=>{
+    const noteData = { title, text, pinned, date: new Date().toISOString() };
+    
+    alert("Trying to save: " + title); // test if button works
+    
+    set(ref(db, 'shrn_dee_biz/notes/' + noteId), noteData)
+    .then(()=>{
       document.getElementById('noteTitle').value='';
       document.getElementById('noteText').value='';
       document.getElementById('notePin').checked=false;
-      alert('✅ Note saved!');
+      alert('✅ Note saved to Firebase!');
     }).catch((err)=>{
-      alert('Error saving note: ' + err.message);
-      console.log(err);
+      alert('❌ Firebase Error: ' + err.message);
+      console.error(err);
     });
   }
-
   function buildNotes(){
     let pinnedDiv = document.getElementById('pinnedNotesList');
     let allDiv = document.getElementById('notesList');
